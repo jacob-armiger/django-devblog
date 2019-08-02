@@ -1,0 +1,33 @@
+{% extends 'blogs/base.html' %}
+
+{% block page_header %}
+    {{ post.title }}
+{% endblock page_header %}
+
+{% block content %}
+    <div class="text-light">
+        <div class="single_post mb-4 pb-2">
+            <h4 class="border-bottom pb-1">{{ post.owner }}, <small>{{ post.date_added }}</small></h4>
+            <p>{{ post.text }}</p>
+        </div>
+
+        <div>
+            <span><a href="{% url 'comments:create_comment' post.id %}" class="text-light">Make Comment</a></span>
+        </div>
+
+        {% for comment in comments %}
+            <div id="comment" class="card mb-3 bg-secondary w-50">
+                <div class="card-body">
+                    <p>{{ comment.text }}</p>
+                <div class="card-subtitle">
+                    <p><small>{{ comment.owner }}, {{ comment.date_added }}</small></p>
+                </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No comments yet</p>
+        {% endfor %}
+    </div>
+
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+body {
+    min-width: 30rem;
+}
+
+nav {
+    font-size: large;
+}
+
+#comment {
+    min-width: 30rem;
+}
+
+.single_post p {
+    font-size: 1.3rem;
+}

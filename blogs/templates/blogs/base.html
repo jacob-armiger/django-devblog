@@ -1,0 +1,79 @@
+{% load bootstrap4 %}
+{% load static %}
+{% load custom_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 
+    shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Family Blog</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body class="bg-dark">
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-faded text-light justify-content-center">
+        <a class="navbar-brand d-flex w-50 mr-auto" href="{% url 'blogs:index' %}">Family Blog</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarCollapse" aria-controls="navbarCollapse"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span></button>
+    
+        <div class="navbar-collapse collapse w-100" id="navbarCollapse">
+            
+
+            <ul class="navbar-nav w-100 justify-content-center">
+                {% get_staff_users as staff_users %}
+                {% for staff in staff_users%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blogs:staff_page' staff.id %}">
+                            {{ staff.username }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                {% if user.is_authenticated %}
+                    <li class="nav-item mt-2">
+                        <span class="">Welcome, {{ user }}!</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% if user.is_authenticated and user.is_staff %}
+        <div>
+            <a class="btn btn-secondary text-light ml-2 mt-2" 
+                href="{% url 'blogs:new_post' %}">Create a new post</a></button>
+        </div>
+    {% endif %}
+
+    <main role="main" class="container">
+        <div class="display-4 text-light mb-4 ">
+            {% block page_header %}{% endblock page_header %}
+        </div>
+        <div>
+            {% block content %}{% endblock content %}
+        </div>
+    </main>
+
+
+
+</body>
+</html>

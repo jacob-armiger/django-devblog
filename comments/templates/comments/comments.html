@@ -1,0 +1,8 @@
+<!--paste this html into the template you want comments in-->
+
+{% for comment in comments %}
+    <h4>{{ comment.owner }}</h4>
+    <p>{{ comment.text }}</p>
+{% empty %}
+    <p>No comments yet</p>
+{% endfor %}
