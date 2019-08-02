@@ -127,16 +127,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# Added from heroku documentation
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# My Settings
-LOGIN_URL='users:login'
+STATIC_URL = '/static/'
 
 # Makes django search for more static files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/static/',
 ]
+
+# My Settings
+LOGIN_URL='users:login'
 
 # Heroku settings
 import django_heroku
