@@ -135,7 +135,7 @@ LOGIN_URL='users:login'
 # Makes django search for more static files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    '/Blog/static/',
+    '/static/',
 ]
 
 # Heroku settings
