@@ -133,10 +133,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Makes django search for more static files
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/static/',
-]
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # My Settings
 LOGIN_URL='users:login'
