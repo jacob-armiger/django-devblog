@@ -3,12 +3,15 @@
 {% block content %}
     {% for post in posts %}
         <div class="card mt-4 mb-4">
-            <h4 class="card-header">{{ post.title }}</h4>
+            <h4 class="card-header"><a href="{% url 'blogs:post' post.id %}"
+                class="text-dark">{{ post.title }}</a></h4>
             <div class="card-body">
-                <h5 class="card-subtitle mb-2 text-muted"><b>{{ post.owner }}</b>, <small>{{ post.date_added }}</small></h6>
-                <p class="card-text">{{ post.text }}</p>
+                <h5 class="card-subtitle mb-2 text-muted"><b>{{ post.owner }}</b>,
+                    <small>{{ post.date_added }}</small></h6>
+                <p class="card-text">{{ post.text|linebreaks }}</p>
                 {% if user.is_staff %}
-                    <a href="{% url 'blogs:edit_post' post.id %}" class="card-link btn btn-sm btn-info">Edit</a>
+                    <a href="{% url 'blogs:edit_post' post.id %}"
+                        class="card-link btn btn-sm btn-info">Edit</a>
                 {% endif %}
             </div>
         </div>

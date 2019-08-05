@@ -1,17 +1,20 @@
 from django.shortcuts import render, redirect
 from .models import Comment, BlogPost
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from .forms import CommentForm
 
 # Create your views here.
 def comments(request, post_id):
     """A view for a comment section"""
-    """ Move logic into the view you want comments for. """
+    """ Move logic into the app/view you want comments for. """
     comments = Comment.objects.filter(post=post_id).order_by('-date_added')
 
     context = {'comments': comments}
     return render(request, 'comments/comments.html', context)
 
+@login_required
 def create_comment(request, post_id):
     """Page for users to create a new comment"""
     post = BlogPost.objects.get(id=post_id)
@@ -32,3 +35,10 @@ def create_comment(request, post_id):
     context = {'form': form, 'post': post}
     return render(request, 'comments/create_comment.html', context)
 
+@login_required
+def delete_comment(request, post_id, comment_id):
+    post = BlogPost.objects.get(id=post_id)
+    comment_to_delete = Comment.objects.get(id=comment_id)
+    if comment_to_delete.owner == request.user.id:
+        comment_to_delete.delete()
+    return redirect('blogs:post', post_id=post.id)
