@@ -1,16 +1,9 @@
-body {
-    min-width: 30rem;
-}
-
 nav {
     font-size: large;
 }
-
-#comment {
-    min-width: 30rem;
-    width: 50rem;
-}
-
 .single_post p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+}
+#comment {
+    max-width: 50rem;
 }
