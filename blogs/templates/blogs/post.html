@@ -21,11 +21,17 @@
                 <div class="card-body pb-3 pt-3">
                     <p>{{ comment.text }}</p>
                     <p class="card-subtitle">
-                        <small>{{ comment.owner }}, {{ comment.date_added }}</small>
+                        <small>
+                            {{ comment.owner }}, {{ comment.date_added }}
                             {% if user == comment.owner %}
-                            <a class="btn btn-sm btn-outline-warning"
-                                href="{% url 'comments:delete_comment' post.id comment.id %}">Delete</a>
-                            {% endif %}
+                            <b>
+                                <a class="text-light"
+                                    href="{% url 'comments:delete_comment' comment.id %}">Delete</a>
+                                <a class="text-light"
+                                    href="{% url 'comments:edit_comment' comment.id %}">Edit</a>
+                                {% endif %}
+                            </b>
+                        </small>
                     </p>
                 </div>
             </div>

@@ -10,5 +10,7 @@ urlpatterns = [
     # Page to create a comment
     path('create_comment/<int:post_id>/', views.create_comment, name='create_comment'),
     # Page to delete comment
-    path('delete_comment/<int:post_id>/<int:comment_id>', views.delete_comment, name='delete_comment'),
+    path('delete_comment/<int:comment_id>', views.delete_comment, name='delete_comment'),
+    # Page to Edit comment
+    path('edit_comment/<int:comment_id>', views.edit_comment, name='edit_comment'),
 ]
