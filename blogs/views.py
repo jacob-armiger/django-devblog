@@ -11,7 +11,7 @@ from .forms import BlogPostForm
 
 # Create your views here.
 def index(request):
-    """Home page for blogs"""
+    """Home page for blogs. Shows all posts"""
     posts = BlogPost.objects.order_by('-date_added')
 
     context = {'posts': posts}

@@ -7,3 +7,11 @@ nav {
 #comment {
     max-width: 50rem;
 }
+#comment_bar {
+    font-size: x-small;
+    opacity: 0.75;
+}
+#comment_bar a {
+    font-size: small;
+    font-weight: bold;
+}

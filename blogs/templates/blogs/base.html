@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,
     shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Family Blog</title>
+    <title>DevBlog</title>
 
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
@@ -18,7 +18,7 @@
 <body class="bg-dark">
 
     <nav class="navbar navbar-expand-md navbar-dark bg-faded text-light justify-content-center">
-        <a class="navbar-brand d-flex w-50 mr-auto" href="{% url 'blogs:index' %}">Family Blog</a>
+        <a class="navbar-brand d-flex w-50 mr-auto" href="{% url 'blogs:index' %}">DevBlog</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarCollapse" aria-controls="navbarCollapse"
@@ -27,7 +27,9 @@
     
         <div class="navbar-collapse collapse w-100" id="navbarCollapse">
             
-
+            <!--This portion puts all staff users onto the navbar; here, users
+                can click to see a staff member's post. Staff users are selected
+                by the Super User in the admin page.-->
             <ul class="navbar-nav w-100 justify-content-center">
                 {% get_staff_users as staff_users %}
                 {% for staff in staff_users%}
@@ -65,7 +67,7 @@
     {% endif %}
 
     <main role="main" class="container">
-        <div class="display-4 text-light mb-4 ">
+        <div class="display-4 text-light mb-4">
             {% block page_header %}{% endblock page_header %}
         </div>
         <div>
