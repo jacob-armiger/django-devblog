@@ -1,0 +1,20 @@
+{% extends 'blogs/base.html' %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+    Report a Comment
+{% endblock page_header %}
+
+
+{% block content %}
+    <h4 class="text-light">
+        <form method='post' action="{% url 'comments:report_comment' comment.id %}"
+            class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button name='submit' class="btn btn-sm">Report</button>
+            {% endbuttons %}
+        </form>
+    </h4>
+{% endblock content %}

@@ -3,7 +3,7 @@ from .models import Comment, BlogPost
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from .forms import CommentForm
+from .forms import CommentForm, ReportForm
 
 # Create your views here.
 def comments(request, post_id):
@@ -39,7 +39,7 @@ def create_comment(request, post_id):
 def delete_comment(request, comment_id):
     comment_to_delete = Comment.objects.get(id=comment_id)
     post = comment_to_delete.post
-    if comment_to_delete.owner == request.user:
+    if comment_to_delete.owner == request.user or request.user.is_staff:
         comment_to_delete.delete()
     return redirect('blogs:post', post_id=post.id)
 
@@ -58,3 +58,29 @@ def edit_comment(request, comment_id):
     
     context = {'form': form, 'comment': comment}
     return render(request, 'comments/edit_comment.html', context)
+
+def report_comment(request, comment_id):
+    """Lets users report a bad comment"""
+    comment = Comment.objects.get(id=comment_id)
+    post = comment.post
+
+    comment.reported = True
+    comment.save()
+
+    if request.method == 'POST':
+        form = ReportForm(data=request.POST)
+
+        if form.is_valid():
+            report= form.save(commit=False)
+            #This creates the relationship between the comment and the user/post
+            report.owner = request.user
+            report.post = post
+
+            report.save()
+            return redirect('blogs:post', post_id=post.id)
+    else:
+        form = ReportForm()
+    
+    context = {'form': form, 'comment': comment}
+    return render(request, 'comments/report_comment.html', context)
+    

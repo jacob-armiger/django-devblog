@@ -9,6 +9,18 @@ class Comment(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
+    reported = models.BooleanField(default=False)
+
+    def __str__(self):
+        """Return string representation of the model"""
+        return self.text
+
+class Report(models.Model):
+    """Model of a comment report"""
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
+    text = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         """Return string representation of the model"""

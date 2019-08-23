@@ -22,12 +22,14 @@
                     <p class="mb-1">{{ comment.text }}</p>
                     <div id="comment_bar" class="card-subtitle d-inline">
                         <span>{{ comment.owner }}, {{ comment.date_added }}</span>
-                        {% if user == comment.owner %}
+                        {% if user == comment.owner or user.is_staff %}
                             <span><a class="text-warning mx-1"
                                 href="{% url 'comments:delete_comment' comment.id %}">Delete</a></span>  
                             <span><a class="text-warning mx-1"
                                 href="{% url 'comments:edit_comment' comment.id %}">Edit</a></span>
                         {% endif %}
+                        <span><a class="text-warning mx-1"
+                            href="{% url 'comments:report_comment' comment.id %}">Report</a></span>
                     </div>
                 </div>
             </div>

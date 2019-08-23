@@ -13,4 +13,6 @@ urlpatterns = [
     path('delete_comment/<int:comment_id>', views.delete_comment, name='delete_comment'),
     # Page to Edit comment
     path('edit_comment/<int:comment_id>', views.edit_comment, name='edit_comment'),
+    # Page to report comment
+    path('report_comment/<int:comment_id>', views.report_comment, name='report_comment')
 ]
