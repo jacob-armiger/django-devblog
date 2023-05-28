@@ -1,3 +1,6 @@
+# Deprecation Notice
+This project is no longer hosted and will no longer be maintained!
+
 # django-devblog
 This is a basic blog webapp that I designed to be used by developers to give their users
 information about patch notes and releases. I used Django, Python 3, bootstrap4,
